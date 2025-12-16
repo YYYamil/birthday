@@ -102,3 +102,34 @@ particlesJS("particles", {
     retina_detect: true
   });
   
+   document.querySelectorAll('.balloon').forEach(balloon => {
+
+    balloon.addEventListener('click', () => {
+  
+      const rect = balloon.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+  
+      // CONFETI
+      confetti({
+        particleCount: 120,
+        spread: 90,
+        startVelocity: 40,
+        origin: { x, y },
+        colors: ['#ff4fd8', '#4fffff', '#ffe066', '#a66bff', '#ffffff']
+      });
+  
+      // EFECTO EXPLOSIÓN
+      balloon.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+      balloon.style.transform = 'scale(1.6)';
+      balloon.style.opacity = '0';
+  
+      // OPCIONAL: eliminar globo
+      setTimeout(() => {
+        balloon.remove();
+      }, 300);
+  
+    });
+  
+  });
+  

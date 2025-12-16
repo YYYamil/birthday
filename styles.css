@@ -187,3 +187,108 @@ html, body {
     pointer-events: none;
 }
 
+
+
+
+.balloons-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    pointer-events: auto; /* 👈 CLAVE */
+    
+
+}
+
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 70px;
+    height: 90px;
+    border-radius: 50%;
+    animation: floatUp 18s linear infinite;
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+
+
+}
+
+.balloon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: sway 4s ease-in-out infinite;
+}
+
+/* HILO */
+.balloon::after {
+    content: "";
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    width: 2px;
+    height: 80px;
+    background: rgba(255,255,255,0.4);
+}
+
+/* COLORES */
+.balloon.pink::before {
+    background: radial-gradient(circle at 30% 30%, #fff, #ff4fd8);
+    box-shadow: 0 0 30px #ff4fd8;
+}
+.balloon.cyan::before {
+    background: radial-gradient(circle at 30% 30%, #fff, #4fffff);
+    box-shadow: 0 0 30px #4fffff;
+}
+.balloon.purple::before {
+    background: radial-gradient(circle at 30% 30%, #fff, #a66bff);
+    box-shadow: 0 0 30px #a66bff;
+}
+.balloon.yellow::before {
+    background: radial-gradient(circle at 30% 30%, #fff, #ffe066);
+    box-shadow: 0 0 30px #ffe066;
+}
+
+/* POSICIONES */
+.balloon.pink { left: 15%; }
+.balloon.cyan { left: 40%; animation-delay: 4s; }
+.balloon.purple { left: 65%; animation-delay: 8s; }
+.balloon.yellow { left: 85%; animation-delay: 12s; }
+
+/* ANIMACIONES */
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-130vh); opacity: 0; }
+}
+
+@keyframes sway {
+    0% { transform: translateX(0) rotate(-4deg); }
+    50% { transform: translateX(25px) rotate(4deg); }
+    100% { transform: translateX(0) rotate(-4deg); }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .balloon {
+        width: 50px;
+        height: 65px;
+    }
+}
+
+canvas,
+#particles,
+#particles-js,
+#aurora {
+    pointer-events: none !important;
+}
+
+.controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100000; /* 👈 MÁS ALTO QUE GLOBOS */
+    pointer-events: auto;
+}
